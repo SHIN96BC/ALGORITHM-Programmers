@@ -12,9 +12,9 @@ public class PhoneBook{
         for(int i = 0; i < phone_book.length; i++) {
             for(int j = 0; j < phone_book[i].length(); j++) {
                 if(map.containsKey(phone_book[i].substring(0,j))) {
-					// containsKey ´Â Map ¿¡ Å° °ªÀÌ ÀÖ´ÂÁö È®ÀÎÇÏ´Â ¸Þ¼­µåÀÌ´Ù. 
-					// ÀÎÀÚ·Î º¸³½ Å° °ªÀÌ ÀÖÀ¸¸é true ¸¦ ¹ÝÈ¯ÇÏ°í, ¾øÀ¸¸é false ¸¦ ¹ÝÈ¯ÇÑ´Ù.
-					// cf) value °ªÀ» È®ÀÎÇÏ°í ½ÍÀº °æ¿ì¿¡´Â containsValue ¸Þ¼­µå¸¦ »ç¿ëÇÑ´Ù.
+		    // containsKey ëŠ” Map ì— í‚¤ ê°’ì´ ìžˆëŠ”ì§€ í™•ì¸í•˜ëŠ” ë©”ì„œë“œì´ë‹¤. 
+	            // ì¸ìžë¡œ ë³´ë‚¸ í‚¤ ê°’ì´ ìžˆìœ¼ë©´ true ë¥¼ ë°˜í™˜í•˜ê³ , ì—†ìœ¼ë©´ false ë¥¼ ë°˜í™˜í•œë‹¤.
+	            // cf) value ê°’ì„ í™•ì¸í•˜ê³  ì‹¶ì€ ê²½ìš°ì—ëŠ” containsValue ë©”ì„œë“œë¥¼ ì‚¬ìš©í•œë‹¤.
                     answer = false;
                     return answer;
                 }
