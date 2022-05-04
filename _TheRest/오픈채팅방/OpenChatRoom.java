@@ -27,17 +27,20 @@ class OpenChatRoom {
         
         // 메세지 세팅
         String[] answer = new String[arrNum];
-        for(int i=0; i<answer.length; i++) {
+        int answerIndex = 0;
+        for(String msg: record) {
             // 유저의 행동 체크
-            String checkStr = record[i].substring(0, record[i].indexOf(" "));
+            String checkStr = msg.substring(0, msg.indexOf(" "));
             String nick = "";
             if(checkStr.equals("Enter")) { 
                 // Map 에서 id로 닉네임 찾기
-                nick = nickMap.get(record[i].substring(record[i].indexOf(" ")+1, record[i].lastIndexOf(" ")));
-                answer[i] = nick + "님이 들어왔습니다.";
+                nick = nickMap.get(msg.substring(msg.indexOf(" ")+1, msg.lastIndexOf(" ")));
+                answer[answerIndex] = nick + "님이 들어왔습니다.";
+                answerIndex++;
             }else if(checkStr.equals("Leave")) {
-                nick = nickMap.get(record[i].substring(record[i].lastIndexOf(" ")+1, record[i].length()));
-                answer[i] = nick + "님이 나갔습니다.";
+                nick = nickMap.get(msg.substring(msg.lastIndexOf(" ")+1, msg.length()));
+                answer[answerIndex] = nick + "님이 나갔습니다.";
+                answerIndex++;
             }
         }
         
