@@ -1,3 +1,5 @@
+import java.util.Stack;
+
 class CranesGame {
 	public int solution(int[][] board, int[] moves) {
 		int answer=0;
