@@ -1,6 +1,5 @@
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Set;
 
 class OpenChatRoom {
     public String[] solution(String[] record) {
