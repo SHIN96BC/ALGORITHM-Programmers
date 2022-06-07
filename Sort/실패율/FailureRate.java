@@ -2,10 +2,12 @@ import java.util.Arrays;
 
 class FailureRate {
     public int[] solution(int N, int[] stages) {
+        // index 값을 저장할 배열입니다.
         int[] answer = new int[N];
+        // 실패율을 저장할 배열입니다.
         double[] failureRate = new double[N];
         
-        // 처음에 한번 오름차순으로 정렬해서 라운드별로 실패한사람 수를 찾습니다.
+        // 처음에 한번 오름차순으로 정렬해서 라운드별로 실패한사람 수를 찾습니다.(index 값으로 스테이지를 구분합니다.)
         Arrays.sort(stages);
         int index = 0;
         for(int i = 0; i < failureRate.length; i++) {
@@ -29,7 +31,7 @@ class FailureRate {
             total = tempTotal;
         }
         
-        // 스테이지 실패율이 높은 순서대로 정렬합니다.(스테이지 번호로 정렬합니다.)
+        // 스테이지 실패율이 높은 순서대로 정렬합니다.(스테이지 번호(index 값)로 정렬합니다.)
         for(int i = 0; i < answer.length; i++) {
             for(int j = i+1; j < failureRate.length; j++) {
                 if(failureRate[i] < failureRate[j]) {
@@ -45,6 +47,7 @@ class FailureRate {
                 }else if(failureRate[i] == failureRate[j]) {
                     if(answer[i] > answer[j]) {
                     // 실패율이 같을경우 index 값을 비교해서 i 번째가 더 크면 서로 바꿔줍니다.
+                    // (실패율이 같은 경우 index 를 오름차순으로 정렬합니다.)
                         int intTemp = answer[i];
                         answer[i] = answer[j];
                         answer[j] = intTemp;
