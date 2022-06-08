@@ -1,12 +1,10 @@
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
-import java.util.ArrayList;
-import java.util.List;
 
 class ReportResult {
     public int[] solution(String[] id_list, String[] report, int k) {
-        int[] answer = new Int[id_list.length];
+        int[] answer = new int[id_list.length];
         
         // id 별로 신고를 몇번 받았는지를 저장하는 Map 입니다.
         Map<String, Integer> reportNumber = new HashMap<>();
@@ -16,7 +14,7 @@ class ReportResult {
             String reportedId = reportStr.substring(reportStr.lastIndexOf(" ")+1, reportStr.length());
             // 맵에 신고당한 id 가 있다면 value 값을 꺼내어 1을 더해서 다시 저장하고, 없다면 새로 추가합니다.
             if(reportNumber.containsKey(reportedId)) {
-                reportNumber.put(reportedId, reportNumber.get(reportedId));
+                reportNumber.put(reportedId, reportNumber.get(reportedId)+1);
             }else {
                 reportNumber.put(reportedId, 1);
             }
@@ -30,20 +28,30 @@ class ReportResult {
         }
         */
         
-        // 신고 횟수가 초과되어 정지된 id 를 찾아서 배열에 저장합니다.
-        List<String> stopId = new ArrayList<>();
+        // 신고 횟수가 초과되어 정지된 id 를 찾아서 Map에 저장합니다.
+        Map<String, String> stopId = new HashMap<>();
         Set<String> keys = reportNumber.keySet();
         for(String key: keys) {
             if(reportNumber.get(key) >= k) {
-                stopId.add(key);
+                stopId.put(key, key);
+                System.out.println(key);
             }
         }
         
         // 정지당한 id 를 신고한 유저에게 결과 메일을 보내야하는 개수를 구합니다.
         for(int i = 0; i < id_list.length; i++) {
-            
+            for(int j = 0; j < report.length; j++) {
+                String reportId = report[j].substring(0, report[j].indexOf(" "));
+                String reportedId = report[j].substring(report[j].lastIndexOf(" ")+1, report[j].length());
+                if(id_list[i].equals(reportId)) {
+                    if(stopId.containsKey(reportedId)) {
+                        answer[i] += 1;
+                    }
+                }
+            }
         }
         
         return answer;
     }
 }
+// 중복체크하는 것을 깜빡했습니다.
