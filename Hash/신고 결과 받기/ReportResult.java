@@ -9,53 +9,47 @@ class ReportResult {
         int[] answer = new int[id_list.length];
         
         // id 별로 신고를 몇번 받았는지를 저장하는 Map 입니다.
-        Map<String, Integer> reportNumber = new HashMap<>();
+        Map<String, String> reportedIdMap = new HashMap<>();
         
-        // 
+        // Map 에 value 는 신고자들을 문자열로 붙여서 처리합니다.
         
         // 유저들이 몇번 신고를 당했는지 계산합니다.(한사람이 여러번 신고했을 때는 1회로 처리합니다.)
         for(String reportStr: report) {
+            String reportId = reportStr.substring(0, reportStr.indexOf(" "));
             String reportedId = reportStr.substring(reportStr.lastIndexOf(" ")+1, reportStr.length());
             // 맵에 신고당한 id 가 있다면 value 값을 꺼내어 1을 더해서 다시 저장하고, 없다면 새로 추가합니다.
-            if(reportNumber.containsKey(reportedId)) {
-                reportNumber.put(reportedId, reportNumber.get(reportedId)+1);
+            if(reportedIdMap.containsKey(reportedId)) {
+                String reportIdList = reportedIdMap.get(reportedId);
+                // 신고자 리스트에 해당 신고자 id 가 없을 때만 공백과 함께 추가해줍니다.
+                if(!reportIdList.contains(reportId)) {
+                    reportedIdMap.put(reportedId, reportIdList + " " + reportId);
+                }
             }else {
-                reportNumber.put(reportedId, 1);
+                reportedIdMap.put(reportedId, reportId);
             }
         }
-        /* 이렇게 getOrDefault() 를 이용해서 구현할 수도 있습니다.
-        for(String reportStr: report) {
-            String reportedId = reportStr.substring(reportStr.lastIndexOf(" ")+1, reportStr.length());
-            
-            // getOrDefault 메서드는 찾는 키가 존재한다면 찾는 키의 값을 반환하고, 없다면 기본값을 반환하는 메서드 입니다.
-            reportNumber.put(reportedId, reportNumber.getOrDefault(reportedId, 1)+1);
-        }
-        */
         
-        // 신고 횟수가 초과되어 정지된 id 를 찾아서 Map에 저장합니다.
-        Map<String, String> stopId = new HashMap<>();
-        Set<String> keys = reportNumber.keySet();
+        
+        // Map 에 key(신고당한 사람 리스트)값을 하나씩 꺼내서 그 key 값에 매핑되는 String value 값을 공백을 기준으로
+        // split 해서 배열 갯수로 신고자가 몇명인지 알 수 있습니다.
+        Set<String> keys = reportedIdMap.keySet();
         for(String key: keys) {
-            if(reportNumber.get(key) >= k) {
-                stopId.put(key, key);
-                System.out.println(key);
-            }
-        }
-        
-        // 정지당한 id 를 신고한 유저에게 결과 메일을 보내야하는 개수를 구합니다.
-        for(int i = 0; i < id_list.length; i++) {
-            for(int j = 0; j < report.length; j++) {
-                String reportId = report[j].substring(0, report[j].indexOf(" "));
-                String reportedId = report[j].substring(report[j].lastIndexOf(" ")+1, report[j].length());
-                if(id_list[i].equals(reportId)) {
-                    if(stopId.containsKey(reportedId)) {
+            String valueStr = reportedIdMap.get(key);
+            String[] reportIdArray = valueStr.split(" ");
+            // 신고자가 k 랑 같거나 많으면 신고자를 찾아서 +1 해줍니다.
+            if(reportIdArray.length >= k) {
+                // valueStr 에 contains 메서드를 사용해서 신고자 id 배열에 i 번째 사람이 
+                // valueStr(정지당한 유저의 신고자 목록)에 있는지 체크합니다.
+                for(int i = 0; i < id_list.length; i++) {
+                    String userId = id_list[i];
+                    if(valueStr.contains(userId)) {
                         answer[i] += 1;
                     }
                 }
             }
+            
         }
         
         return answer;
     }
 }
-// 중복체크하는 것을 깜빡했습니다.
