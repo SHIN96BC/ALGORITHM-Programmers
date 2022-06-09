@@ -54,4 +54,4 @@ class ReportResult {
         return answer;
     }
 }
-// 추가로 신고당한 사람들도 정지 메일을 받아야 하는데 빼먹었습니다.
+
