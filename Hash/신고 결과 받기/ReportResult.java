@@ -1,6 +1,8 @@
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 class ReportResult {
     public int[] solution(String[] id_list, String[] report, int k) {
@@ -8,6 +10,8 @@ class ReportResult {
         
         // id 별로 신고를 몇번 받았는지를 저장하는 Map 입니다.
         Map<String, Integer> reportNumber = new HashMap<>();
+        
+        // 
         
         // 유저들이 몇번 신고를 당했는지 계산합니다.(한사람이 여러번 신고했을 때는 1회로 처리합니다.)
         for(String reportStr: report) {
