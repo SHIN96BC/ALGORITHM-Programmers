@@ -40,6 +40,7 @@ class ReportResult {
             if(reportIdArray.length >= k) {
                 // valueStr 에 contains 메서드를 사용해서 신고자 id 배열에 i 번째 사람이 
                 // valueStr(정지당한 유저의 신고자 목록)에 있는지 체크합니다.
+                
                 for(int i = 0; i < id_list.length; i++) {
                     String userId = id_list[i];
                     if(valueStr.contains(userId)) {
@@ -53,3 +54,4 @@ class ReportResult {
         return answer;
     }
 }
+// 추가로 신고당한 사람들도 정지 메일을 받아야 하는데 빼먹었습니다.
