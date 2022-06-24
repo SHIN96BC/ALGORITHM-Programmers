@@ -5,7 +5,7 @@ class MaxNumber {
     public String solution(int[] numbers) {
     public String solution(int[] numbers) {
         String answer = "";
-        PriorityQueue<String> priQ = new PriorityQueue<>(Collections.reverseOrder());
+//         PriorityQueue<String> priQ = new PriorityQueue<>(Collections.reverseOrder());
         
         if(numbers.length == 1) {
             return Integer.toString(numbers[0]);
