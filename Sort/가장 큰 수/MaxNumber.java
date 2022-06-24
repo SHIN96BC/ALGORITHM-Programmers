@@ -3,10 +3,16 @@ import java.util.Collections;
 
 class MaxNumber {
     public String solution(int[] numbers) {
+    public String solution(int[] numbers) {
         String answer = "";
+        PriorityQueue<String> priQ = new PriorityQueue<>(Collections.reverseOrder());
+        
+        if(numbers.length == 1) {
+            return Integer.toString(numbers[0]);
+        }
         
         // for 문이 3개나 있다보니 시간초과가 발생한다. int배열을 그대로 2중포문으로 돌리고, 
-        // findMaxNum 메서드에서 String 으로 변환해서 해보자!(실험 결과 큰 차이없음)
+        // findMaxNum 메서드에서 String 으로 변환해서 해보자!
         
         
         // PriorityQueue<String> priQ = new PriorityQueue<>(Collections.reverseOrder());
@@ -17,6 +23,7 @@ class MaxNumber {
         
         for(int i=0; i<numbers.length; i++) {
             for(int j=i+1; j<numbers.length; j++) {
+                if(numbers[j] < 1) continue;
                 if(findMaxNum(numbers[i], numbers[j], 0)) {
                     int intTemp = numbers[i];
                     numbers[i] = numbers[j];
@@ -24,6 +31,9 @@ class MaxNumber {
                 }
             }
         }
+        
+        // 배열이 전부 0인 경우 0을 하나만 반환한다.
+        if(numbers[0] == 0) return "0"; 
         
         // 정리된 배열을 스트링으로 만든다
         for(int number: numbers) {
@@ -72,9 +82,10 @@ class MaxNumber {
                 }
             }
 
-            /** 런타임 에러 해결: if문을 이용해서 문자열의 길이가 loop + 1 과 같으면 문자열 길이가
-             초과 되므로 더 이상 재귀하지않고 return 하게 한다.(조건은 x가 loop + 1을 
-             초과 했을 때, y가 loop + 1 을 초과 했을 때, 둘다 아닐 때) */
+            // 해결: if문을 이용해서 문자열의 길이가 loop + 1 과 같으면 문자열 길이가
+            // 초과 되므로 더 이상 재귀하지않고 return 하게 한다.(조건은 x가 loop + 1을 
+
+            // 초과 했을 때, y가 loop + 1 을 초과 했을 때, 둘다 아닐 때)
             return findMaxNum(x,y,loop+1);
         }else if(xNum < yNum) {
             return true;
@@ -83,6 +94,4 @@ class MaxNumber {
         }
     }
 }
-// 런타임 에러가 발생하고 있는데 아마도 저의 생각은 loop+1 때문에 길이가 초과된게 아닌가 싶습니다.길이에따라 제한이 필요할 것 같다 (해결)
-/** 처음부터 int배열을 그대로 사용해서 해봤지만 결과는 크게 다르지 않았다. (아에 접근 방식을 배열에 있는 숫자로 만들 수 있는 숫자를 다 만들어 놓고 
- PriorityQueue 를 사용해서 정렬해서 맨앞에 숫자를 리턴해봐야겠다. */
+// 60점 시간초과 5개, 실패 1개인데 시간초과는 알겠는데 실패의 원인은 잘 모르겠습니다.
