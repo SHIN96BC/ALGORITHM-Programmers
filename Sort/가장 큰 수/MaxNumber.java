@@ -7,7 +7,7 @@ class MaxNumber {
         String answer = "";
         PriorityQueue<String> priQ = new PriorityQueue<>(Collections.reverseOrder());
 
-        // 우선순위 큐를 이용해서 String 형태로 우선순위를 역순으로 정렬합니다.
+        // 우선순위 큐를 이용해서 String 형태로 우선순위를 역순으로 정렬하려고 했으나, 1000 100 10 1을 비교하는 부분에서 한계가 있다는 것을 알았습니다. 그래서 1 10 100 1000 순으로 정렬하는 코드를 추가하려고 합니다.
         for(int i=0; i<numbers.length; i++) {
            priQ.add(Integer.toString(numbers[i]));
         }
