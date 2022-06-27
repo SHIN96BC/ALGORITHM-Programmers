@@ -11,6 +11,8 @@ class MaxNumber {
         for(int i=0; i<numbers.length; i++) {
            priQ.add(Integer.toString(numbers[i]));
         }
+        // 정렬을 했을 때 1000 100 10 1 이런식으로 정렬되기 때문에 우선순위 큐로 정렬하는 것에는 한계가 있는 것 같습니다.
+        // Arrays.sort(arr, Collections.reverseOrder());
         
         // 배열이 모두 0 일때는 0을 하나만 반환합니다.
         if(priQ.peek().equals("0")) return "0";
@@ -35,6 +37,7 @@ class MaxNumber {
                     break;
                 default:
             }
+            System.out.println(answer);
         }
         answer += lastNumber;
         return answer;
@@ -59,3 +62,6 @@ class MaxNumber {
         }
     }
 }
+// 사전순 정렬에서 1000 이 100 보다 크다고 정의되어 있어서 그런지 1000 100 10 1 이런식으로 정렬이
+// 되기 때문에 1을 먼저 넣어야하는데 1000 과 100 을 비교해서 큰쪽을 answer 에 붙여버리기 때문에
+// 실패하게 되는것 같습니다.
