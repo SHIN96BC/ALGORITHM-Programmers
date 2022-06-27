@@ -11,8 +11,6 @@ class MaxNumber {
         for(int i=0; i<numbers.length; i++) {
            priQ.add(Integer.toString(numbers[i]));
         }
-        // 정렬을 했을 때 1000 100 10 1 이런식으로 정렬되기 때문에 우선순위 큐로 정렬하는 것에는 한계가 있는 것 같습니다.
-        // Arrays.sort(arr, Collections.reverseOrder());
         
         // 배열이 모두 0 일때는 0을 하나만 반환합니다.
         if(priQ.peek().equals("0")) return "0";
