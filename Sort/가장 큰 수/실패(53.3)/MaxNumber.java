@@ -23,7 +23,7 @@ class MaxNumber {
         if(priQ.peek().equals("0")) return "0";
         
         // 큐에서 하나씩 꺼내서 checkMaxNumberStr 메서드의 결과에 따라 다르게 처리해줍니다.
-        String lastNumber = null;
+       String lastNumber = null;
        while(priQ.size() > 0) {
             String firstNumber = priQ.poll();
 
@@ -69,23 +69,41 @@ class MaxNumber {
                 	arrayList.add(lastNumber);
                 }
                 
-                
-                
+                // 우선순위 체크를 위한 변수입니다.
+                String zeroCheckLastNumber = null;
                 while(priQ.peek() != null && priQ.peek().charAt(0) == firstNumber.charAt(0)) {
                 	// 첫번째 숫자 이외에 나머지가 0인 숫자를 배열에 담아야 합니다.
                 	// 아스키코드 0 ~ 9 == 48 ~ 57
-                	String zeroCheckStr = priQ.poll();
-                	int checkZeroNumber = checkZeroNumber(zeroCheckStr);
+                	String zeroCheckFirstNumber = priQ.poll();
+                	
+                	int checkZeroNumber = checkZeroNumber(zeroCheckFirstNumber);
                 	// 만약 체크한 0의 갯수가 해당 문자열의 길이 -1 과 같다면 배열에 넣어주고, 아니라면 answer 에 더해줍니다.
-                	if(checkZeroNumber == zeroCheckStr.length()-1) {
-                		arrayList.add(zeroCheckStr);
+                	if(checkZeroNumber == zeroCheckFirstNumber.length()-1) {
+                		arrayList.add(zeroCheckFirstNumber);
                 	}else {
-                		answer += zeroCheckStr;
+                		// 우선순위 체크를 위해서 zeroCheckLastNumber 가 null 일 경우 방금 poll 한 값을 zeroCheckLastNumber 에 대입해주고, 
+                		// null 이 아니라면 비교해서 큰쪽을 answer 에 더해줍니다.
+                		if(zeroCheckLastNumber != null) {
+                			int result = checkMaxNumberStr(zeroCheckFirstNumber, zeroCheckLastNumber);
+
+                            switch(result) {
+                                case FIRST_NUMBER_MAX:
+                                    answer += zeroCheckFirstNumber;
+                                    break;
+                                case LAST_NUMBER_MAX:
+                                    answer += zeroCheckLastNumber;
+                                    zeroCheckLastNumber = zeroCheckFirstNumber;
+                                    break;
+                            }
+                		}else {
+                			zeroCheckLastNumber = zeroCheckFirstNumber;
+                		}
                 	}
-                    
                 }
-                // 맨 앞자리 빼고 모두 0으로 이루어진 배열을 다시 정순으로 정렬합니다. 
+                // 만약 zeroCheckLastNumber 가 남아있다면 answer 에 더해줍니다.
+                if(zeroCheckLastNumber != null) answer += zeroCheckLastNumber;
                 
+                // 맨 앞자리 빼고 모두 0으로 이루어진 배열을 다시 정순으로 정렬합니다. 
                 Collections.sort(arrayList);
                 for(String str: arrayList) {
                     answer += str;
@@ -104,7 +122,6 @@ class MaxNumber {
                     answer += lastNumber;
                     lastNumber = firstNumber;
                     break;
-                default:
             }
         }
         if(lastNumber != null) answer += lastNumber;
@@ -148,6 +165,14 @@ class MaxNumber {
         }else if(str2 == null) {
             return FIRST_NUMBER_MAX;
         }
+        // 사전순이 아니라 int 로 계산합니다.
+    	if(Integer.parseInt(str1+str2) >= Integer.parseInt(str2+str1)) {
+    		return FIRST_NUMBER_MAX;
+    	}else {
+    		return LAST_NUMBER_MAX;
+    	}
+        
+        /*
         String tempStr = str1 + str2;
         // String 클래스의 compareTo()  메서드를 사용해서 사전순으로 비교합니다.
         // 파라미터의 스트링값이 더 크면 음수, 같으면 0, 작으면 양수
@@ -156,6 +181,7 @@ class MaxNumber {
         }else {
             return LAST_NUMBER_MAX;
         }
+        */
     }
 }
 // 사전순 정렬에서 1000 이 100 보다 크다고 정의되어 있어서 그런지 1000 100 10 1 이런식으로 정렬이
