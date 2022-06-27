@@ -7,11 +7,12 @@ class MaxNumber {
         String answer = "";
         PriorityQueue<String> priQ = new PriorityQueue<>(Collections.reverseOrder());
 
-        // 우선순위 큐를 이용해서 String 형태로 우선순위를 역순으로 정렬하려고 했으나, 1000 100 10 1을 비교하는 부분에서 한계가 있다는 것을 알았습니다. 그래서 1 10 100 1000 순으로 정렬하는 코드를 추가하려고 합니다.
+        // 우선순위 큐를 이용해서 String 형태로 우선순위를 역순으로 정렬하려고 했으나, 1000 100 10 1을 비교하는 부분에서 한계가 있다는 것을 알았습니다. 그래서 1 10 100 1000 순으로 정렬하는 코드를 추가하려고 합니다. 
+        
         for(int i=0; i<numbers.length; i++) {
            priQ.add(Integer.toString(numbers[i]));
         }
-        
+
         // 배열이 모두 0 일때는 0을 하나만 반환합니다.
         if(priQ.peek().equals("0")) return "0";
         
@@ -23,8 +24,27 @@ class MaxNumber {
             // tempStr 이 null 일때 poll 을 한번 합니다.
             if(lastNumber == null) lastNumber = priQ.poll();
             
-            int result = checkMaxNumberStr(firstNumber, lastNumber);
+            // 앞자리가 같은 숫자들이(ex: 10 100 1000) 0을 포함하고 있는지 확인해서 우선순위를 바꿔줍니다.
+            // 앞자리가 같은 숫자들을 전부 poll 해서 배열에 담습니다.
+            if(firstNumber.charAt(0) == lastNumber.charAt(0)) {
+                ArrayList<String> arrayList = new ArrayList<>();
+                arrayList.add(firstNumber);
+                arrayList.add(lastNumber);
+                while(priQ.peek().charAt(0) == firstNumber.charAt(0)) {
+                    arrayList.add(priQ.poll());
+                }
+                
+                for(int i = 0; i < arrayList.size(); i++) {
+                    arrayList.get(i);
+                }
+                if(firstNumber.contains("0")) {
+                    
+                }
+            }
             
+            
+            int result = checkMaxNumberStr(firstNumber, lastNumber);
+
             switch(result) {
                 case FIRST_NUMBER_MAX:
                     answer += firstNumber;
@@ -38,6 +58,23 @@ class MaxNumber {
             System.out.println(answer);
         }
         answer += lastNumber;
+        
+        
+         // 정렬을 했을 때 1000 100 10 1 이런식으로 정렬되기 때문에 우선순위 큐로 정렬하는 것에는 한계가 있는 것 같습니다. 일반배열로 변경합니다.
+        // Arrays.sort(arr, Collections.reverseOrder());
+        /* 일반 배열
+        String[] strArray = new String[numbers.length];
+        for(int i = 0; i < numbers.length; i++) {
+            strArray[i] = Integer.toString(numbers[i]);
+        }
+        
+        Arrays.sort(strArray, Collections.reverseOrder());
+        
+        for(String str: strArray) {
+            System.out.println(str);
+        }
+        */
+        
         return answer;
     }
     
