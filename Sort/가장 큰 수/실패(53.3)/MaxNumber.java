@@ -118,6 +118,11 @@ class MaxNumber {
                 // 만약 zeroCheckLastNumber 가 남아있다면 answer 에 더해줍니다.
                 if(zeroCheckLastNumber != null) answer += zeroCheckLastNumber;
                 
+		// 2022-06-27 개선중
+		// 일단 while 문에서 맨 앞자리가 같은 숫자들을 배열에 담고, 그 배열을 정렬하는데 그 기준은 두번째 세번째 자리수가 맨 앞자리 숫자보다 낮으면 
+		// 또 다른 배열에 일단 담아서 한자리 숫자가 앞으로 올 수 있도록 합니다.
+		
+		    
                 System.out.println("answer3 = " + answer);
                 
                 // 맨 앞자리 빼고 모두 0으로 이루어진 배열을 다시 정순으로 정렬합니다. 
