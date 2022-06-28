@@ -127,8 +127,7 @@ class MaxNumber {
                 if(lastNumberZero == lastNumber.length()-1) {
                 	zeroList.add(lastNumber);
                 }
-                System.out.println("answer1 = " + answer);
-                
+       
                 // 우선순위 체크를 위한 변수입니다.
                 String zeroCheckLastNumber = null;
                 while(priQ.peek() != null && priQ.peek().charAt(0) == firstNumber.charAt(0)) {
@@ -198,9 +197,6 @@ class MaxNumber {
                 		}
 
                 	}
-                	
-                	System.out.println("answer2 = " + answer);
-                	System.out.println("zeroCheckLastNumber = " + zeroCheckLastNumber);
                 }
                 // 만약 zeroCheckLastNumber 가 남아있다면 answer 에 더해줍니다.
                 if(zeroCheckLastNumber != null) {
@@ -217,8 +213,6 @@ class MaxNumber {
 		// 또 다른 배열에 일단 담아서 한자리 숫자가 앞으로 올 수 있도록 합니다.
 		
                 for(String number: lastNumberList) answer += number;
-		    
-                System.out.println("answer3 = " + answer);
                 
                 // 맨 앞자리 빼고 모두 0으로 이루어진 배열을 다시 정순으로 정렬합니다. 
                 Collections.sort(zeroList);
@@ -243,28 +237,12 @@ class MaxNumber {
         }
         if(lastNumber != null) answer += lastNumber;
         
-        
-         // 정렬을 했을 때 1000 100 10 1 이런식으로 정렬되기 때문에 우선순위 큐로 정렬하는 것에는 한계가 있는 것 같습니다. 일반배열로 변경합니다.
-        // Arrays.sort(arr, Collections.reverseOrder());
-        /* 일반 배열
-        String[] strArray = new String[numbers.length];
-        for(int i = 0; i < numbers.length; i++) {
-            strArray[i] = Integer.toString(numbers[i]);
-        }
-        
-        Arrays.sort(strArray, Collections.reverseOrder());
-        
-        for(String str: strArray) {
-            System.out.println(str);
-        }
-        */
-        
         return answer;
     }
     
     // 맨 앞에 숫자 이외에 숫자중에 맨 앞에 숫자보다 낮은 숫자가 있는지 체크하는 메서드
     private boolean checkFirstNumberMoreMinNumber(String firstStr, String checkStr) {
-
+    	
     	for(int i = 1; i < checkStr.length(); i++) {
     		// 작은 숫자가 있으면 return true
     		if(firstStr.charAt(0) >= checkStr.charAt(i)) {
@@ -332,4 +310,4 @@ class MaxNumber {
 // 여러 testCase 코드를 실험해본 결과 테스트 10번의 40, 403 일 때 40403 이 되어야하는데 40340 이 되는 현상을 발견했습니다. 
 // 또한 testCase 14번의 2, 22, 223 일 때 223222 가 되어야하는데 222322 가 됩니다.
 // 마지막으로 testCase 20번의 12, 1213 일 때 121312 가 되어야 하는데 121213 이 됩니다.
-
+// 그래서 맨 앞자리가 같은 숫자들을 배열에 담을 때 크기를 하나하나 비교해서 넣으려고 했으나, 그렇게하면 시간초과가 되어버려서 역시 compareTo 를 사용해야 해결할 수 있을 것 같습니다.
