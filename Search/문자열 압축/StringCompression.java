@@ -1,12 +1,21 @@
 import java.util.Arrays;
 
 class StringCompression {
-    public int solution(String s) {
+	String test1 = "aabbaccc";
+	String test2 = "ababcdcdababcdcd";
+	String test3 = "abcabcdede";
+	String test4 = "abcabcabcabcdededededede";
+	String test5 = "xababcdcdababcdcd";
+	String test6 = "abcdefgabcdefg";
+	String test7 = "abcdefghabcdefgh";
+	String test8 = "abcdeabcd";
+	String test9 = "abcterssdasdwqrrwewrsdfwetsdgxcvssdssddfxccxxddwerrrdff";
+	
+	public int solution(String s) {
         int answer = 0;
-            
-        // 만약 문자열의 길이가 1이라면 바로 1을 return합니다.(런타임 에러 해결)
-        if(s.length() == 1) return 1;    
-            
+        
+        if(s.length() == 1) return 1;
+        
         // 1개부터 n/2개 까지 잘랐을 때의 문자열의 길이를 담을 배열입니다.
         // 어차피 문자열 길이의 절반까지만 자를 수 있으므로 배열의 길이는 문자열 길이의 절반으로 합니다.
         int[] strLengthNumberArray = new int[s.length()/2];
@@ -21,34 +30,37 @@ class StringCompression {
             for(int j = (i+1); j < s.length(); j=j+(i+1)) {
             	// 만약 j+(i+1) 가 s 의 length 보다 작거나 같을 때는 문자열을 비교하고, length 보다 크면 나머지 문자열을 그냥 붙입니다.
             	if(j+(i+1) <= s.length()) {
-		            // 만약 j 부터 j+(i+1) 까지 문자열을 잘랐을 때 checkCutStr 과 같으면 compressionNumber 를 1 증가 시킵니다.
-		            if(checkCutStr.equals(s.substring(j, j+(i+1)))) {
-		            	compressionNumber++;
-		            }else {
-		            	// 만약 compressionNumber 가 1이 아니라면 같은 문자가 있었다는 것이므로 resultStr 에 추가해줍니다.
-		            	if(compressionNumber > 1) {
-		            		resultStr += compressionNumber + checkCutStr;
-		            	}else {
-		            		resultStr += checkCutStr;
-		            	}
-		            	// 같지 않으면 checkCutStr 를 다음 문자로 바꿔줍니다.
-		            	checkCutStr = s.substring(j, j+(i+1));
-		            	compressionNumber = 1;
-		            }
+		    // 만약 j 부터 j+(i+1) 까지 문자열을 잘랐을 때 checkCutStr 과 같으면 compressionNumber 를 1 증가 시킵니다.
+		    if(checkCutStr.equals(s.substring(j, j+(i+1)))) {
+			compressionNumber++;
+		    }else {
+			// 만약 compressionNumber 가 1이 아니라면 같은 문자가 있었다는 것이므로 resultStr 에 추가해줍니다.
+			if(compressionNumber > 1) {
+				resultStr += compressionNumber + checkCutStr;
+			}else {
+				resultStr += checkCutStr;
+			}
+			// 같지 않으면 checkCutStr 를 다음 문자로 바꿔줍니다.
+			checkCutStr = s.substring(j, j+(i+1));
+			compressionNumber = 1;
+		    }
             	}
             	// 마지막으로 남은 문자열을 더해줍니다.
-        		if(j+(i+1) >= s.length()) {
-        			if(compressionNumber > 1) {
-        				resultStr += compressionNumber + checkCutStr;
-        			}else {
-        				// compressionNumber 가 1보다 작거나 같을 경우 나머지 문자들을 모두 붙여줍니다.
-        				if(j+(i+1) == s.length()) {
-        					resultStr += checkCutStr;
-        				}else {
-        					// 만약 j+(i+1) 가 s 의 길이와 같지 않다면 뒤에 문자가 남아있다는 의미가 되므로 마지막 문자까지 추가해줍니다.
-                    		resultStr += checkCutStr + s.substring(j, s.length());
-        				}
-        				
+        	if(j+(i+1) >= s.length()) {
+			if(compressionNumber > 1) {
+				resultStr += compressionNumber + checkCutStr;
+				// 만약 j+(i+1) 가 s 의 길이와 같지 않다면 뒤에 문자가 남아있다는 의미가 되므로 마지막 문자까지 추가해줍니다.(실패 문제 해결)
+				if(j+(i+1) != s.length()) {
+					resultStr += s.substring(j, s.length());
+				}
+			}else {
+				// compressionNumber 가 1보다 작거나 같을 경우 나머지 문자들을 모두 붙여줍니다.
+				if(j+(i+1) == s.length()) {
+					resultStr += checkCutStr;
+				}else {
+					// 만약 j+(i+1) 가 s 의 길이와 같지 않다면 뒤에 문자가 남아있다는 의미가 되므로 마지막 문자까지 추가해줍니다.
+					resultStr += checkCutStr + s.substring(j, s.length());
+				}
                 	}
             	}
             }
@@ -64,4 +76,10 @@ class StringCompression {
         
         return answer;
     }
+	
+	public static void main(String[] args) {
+		TestD testD = new TestD();
+		int result = testD.solution(testD.test9);
+		System.out.println("result = " + result);
+	}
 }
