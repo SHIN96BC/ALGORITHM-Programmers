@@ -3,6 +3,10 @@ import java.util.Arrays;
 class StringCompression {
     public int solution(String s) {
         int answer = 0;
+            
+        // 만약 문자열의 길이가 1이라면 바로 1을 return합니다.(런타임 에러 해결)
+        if(s.length() == 1) return 1;    
+            
         // 1개부터 n/2개 까지 잘랐을 때의 문자열의 길이를 담을 배열입니다.
         // 어차피 문자열 길이의 절반까지만 자를 수 있으므로 배열의 길이는 문자열 길이의 절반으로 합니다.
         int[] strLengthNumberArray = new int[s.length()/2];
