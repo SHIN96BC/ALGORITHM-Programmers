@@ -54,4 +54,8 @@ class ReportResult {
         return answer;
     }
 }
-
+// 다 푼줄알고 넘어갔는데 다시보니 아니어서 다시 풉니다.
+// 3~21 테스트 실패 
+// 원인은 제가 생각할 때 String 의 contains 이 해당 글자를 포함하는 이라는 기준이기 때문에 
+// 만약 con 이라는 id 를 가지고 contains 를 하게되면 conten, cont 등등 의 con 을 포함하는 단어들이 모두 포함되어 버리기
+// 때문에 실패하는 것 같습니다.
