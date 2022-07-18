@@ -5,13 +5,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 class ReportResult {
-    import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
-import java.util.ArrayList;
-import java.util.List;
-
-class Solution {
     public int[] solution(String[] id_list, String[] report, int k) {
        int[] answer = new int[id_list.length];
         
