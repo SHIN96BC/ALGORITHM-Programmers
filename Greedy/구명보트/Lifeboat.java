@@ -103,7 +103,6 @@ class Lifeboat {
                 break;
             }
         }
-        System.out.println("answer = " + answer);
         
         return answer;
     }
