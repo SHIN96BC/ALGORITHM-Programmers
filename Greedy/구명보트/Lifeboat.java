@@ -107,3 +107,4 @@ class Lifeboat {
         return answer;
     }
 }
+// 실패의 원인을 분석중입니다.(시간초과 1개도 해결해야합니다.)
