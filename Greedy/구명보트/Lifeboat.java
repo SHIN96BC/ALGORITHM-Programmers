@@ -85,6 +85,8 @@ class Lifeboat {
         return answer;
 */
         
+/* 실패3 내림차순으로 정렬해서 진행했지만 65점 실패(시간초과 1개 포함) 아마도 내림차순 정렬하는 부분에서 시간초과가 된 것 같습니다.
+
         // 내림차순으로 정렬해서 맨앞(제일큰수)와 맨뒤(제일작은수)를 더해서 limit 을 넘는지 확인합니다.
         // 내림차순 정렬을 위해 int 배열을 Integer 배열로 바꿔줍니다.
         Integer[] peopleBoxed = Arrays.stream(people).boxed().toArray(Integer[]::new);
@@ -105,6 +107,30 @@ class Lifeboat {
         }
         
         return answer;
+*/
+        
+// # 성공 내림차순에서 과부화가 걸린다고 생각해서 오름차순으로 정렬한 뒤 진행했습니다.
+        
+        // 오름차순으로 정렬해서 맨앞(제일작은수)와 맨뒤(큰수)를 더해서 limit 을 넘는지 확인합니다.
+        Arrays.sort(people);
+        
+        // 맨 앞의 인덱스와 맨 뒤에 인덱스 변수를 만들어서 firstIndex 보다 lastIndex 가 더 작아질 때 까지 반복합니다.
+        int firstIndex = 0; // 맨 앞 사람 체크용 변수
+        int lastIndex = people.length - 1; // 맨 뒤 사람 체크용 변수
+        while (firstIndex <= lastIndex) {
+            
+            // firstIndex 번째 사람이 lastIndex 사람과 같이 보트를 탈 수 있다면 firstIndex++ 해줍니다.
+            if (people[firstIndex] + people[lastIndex] <= limit) {
+                firstIndex++;
+            }
+            // 일단 무조건 한명은 보트를 타기 때문에 answer++ 해줍니다.
+            answer++;
+            // 제일 무거운 사람부터 태워서 보내기 때문에 lastIndex-- 해줍니다.
+            lastIndex--;
+        }
+        
+        return answer;
+        
     }
 }
 
