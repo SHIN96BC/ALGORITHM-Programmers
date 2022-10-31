@@ -1,5 +1,5 @@
 class CourierBox {
-    public int solution(int[] order) {
+   public int solution(int[] order) {
         int answer = 0;
         
         Stack<Integer> stack = new Stack<>();
@@ -16,6 +16,7 @@ class CourierBox {
                 // 만약에 다르다면 stack 에 맨 위에 있는 값과 비교해서 같다면 트럭에 실은 개수를 +1 해줍니다.
                 if (stack.size() > 0) {
                     if (order[orderIndex] == stack.peek()) {
+                        stack.pop();
                         answer++;
                         orderIndex++;
                     } else {
@@ -24,6 +25,17 @@ class CourierBox {
                 } else {
                     stack.push(i);
                 }
+            }
+        }
+        
+        
+        while (stack.size() > 0) {
+            if (stack.peek() == order[orderIndex]) {
+                stack.pop();
+                answer++;
+                orderIndex++;
+            } else {
+                break;
             }
         }
         
