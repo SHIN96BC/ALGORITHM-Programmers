@@ -27,8 +27,7 @@ class CourierBox {
                 }
             }
         }
-        
-        
+       
         while (stack.size() > 0) {
             if (stack.peek() == order[orderIndex]) {
                 stack.pop();
