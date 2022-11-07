@@ -29,7 +29,7 @@ class Hamburger {
         return answer;
 */
 
-/* 실패 41.2 시간초과
+/* 실패 47.1 시간초과
         int answer = 0;
         
         Stack<Integer> stack1 = new Stack<>();
@@ -57,6 +57,9 @@ class Hamburger {
                     while (stack2.size() > 0) {
                         stack1.push(stack2.pop());
                     }
+                } else {
+                    stack2.push(stack1.pop());
+                    check = 0;
                 }
                 continue;
             }
