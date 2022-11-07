@@ -29,7 +29,9 @@ class Hamburger {
         return answer;
 */
 
-/* 실패 47.1 시간초과
+/* 실패 47.1 시간초과 
+(시간초과를 해결하기 위해서는 반복문을 줄여야합니다. 즉, stack 에 배열 ingredient 안에 있는 숫자들을 넣으면서 체크해줘서 반복문을 한번만 사용할 수 있도록 구현하겠습니다.)
+(stack 에 숫자를 하나씩 넣으면서 1231 이 되는 즉시 pop 하는 방식으로 구현하겠습니다.)
         int answer = 0;
         
         Stack<Integer> stack1 = new Stack<>();
