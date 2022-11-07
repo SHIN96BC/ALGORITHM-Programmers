@@ -1,5 +1,7 @@
 class Hamburger {
     public int solution(int[] ingredient) {
+/* 실패 35.3점 
+(문제 이해를 잘못했습니다. 1231 순서로 햄버거를 완성하면 그 1231 숫자 4개는 사라지고 사라진 상태에서 다시 1231 이 있는지 찾아야하는 문제였습니다.)
         int answer = 0;
         
         int check = 0;
@@ -25,7 +27,54 @@ class Hamburger {
         }
         
         return answer;
+*/
+
+/* 실패 41.2 시간초과
+        int answer = 0;
+        
+        Stack<Integer> stack1 = new Stack<>();
+        Stack<Integer> stack2 = new Stack<>();
+        
+        for (int i = ingredient.length - 1; i >= 0; i--) {
+            stack1.push(ingredient[i]);
+        }
+        
+        // stack 을 두개 준비해서 첫번째 stack 에서 두번째 stack 으로 숫자를 하나씩 빼면서 체크하고 1231 이 완성되면 1231 4가지 숫자를 삭제하고 첫번째 stack 에 두번째 stack 에 남아있는 숫자를 전부 push 하고 다시 체크하기를 반복합니다.
+        int check = 0;
+        while (stack1.size() > 0) {
+            if (check == 3) {
+                if (stack1.peek() == 1) {
+                    answer++;
+                    check = 0;
+                    
+                    // 1231 삭제
+                    stack1.pop();
+                    for (int i = 0; i < 3; i++) {
+                        stack2.pop();
+                    }
+                    
+                    // stack2 에 있는 숫자를 전부 stack 1 으로 이동
+                    while (stack2.size() > 0) {
+                        stack1.push(stack2.pop());
+                    }
+                }
+                continue;
+            }
+            
+            if (stack1.peek() == check + 1 || stack1.peek() == 1) {
+                check = stack1.pop();
+                stack2.push(check);
+            } else {
+                stack2.push(stack1.pop());
+                check = 0;
+            }
+        }
+        
+        return answer;
+
+*/
+
+        
     }
 }
-// 문제 이해를 잘못했습니다.
-// 1231 순서로 햄버거를 완성하면 그 1231 숫자 4개는 사라지고 사라진 상태에서 다시 1231 이 있는지 찾아야하는 문제였습니다.
+
