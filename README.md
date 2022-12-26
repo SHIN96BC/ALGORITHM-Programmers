@@ -21,16 +21,18 @@
 
 8. Implementation: 구현 알고리즘
 
-9. Practice: 연습 알고리즘
+9. Kruskal: 크루스칼 알고리즘
 
-10. SQL: SQL 문제
+10. Practice: 연습 알고리즘
 
-11. Sorting: 정렬 알고리즘
+11. SQL: SQL 문제
 
-12. Stack_Queue: 스택 & 큐 알고리즘
+12. Sorting: 정렬 알고리즘
 
-13. Trie: 트라이 알고리즘
+13. Stack_Queue: 스택 & 큐 알고리즘
 
-14. Two Pointers & Sliding Window: 투 포인터 & 슬라이딩 윈도우 알고리즘
+14. Trie: 트라이 알고리즘
 
-15. Union Find: 유니온 파인드 알고리즘
+15. Two Pointers & Sliding Window: 투 포인터 & 슬라이딩 윈도우 알고리즘
+
+16. Union Find: 유니온 파인드 알고리즘
