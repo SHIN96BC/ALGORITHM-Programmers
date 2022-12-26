@@ -1,6 +1,6 @@
 # ALGORITHM-Programmers
 
-1. Binary Search: 이진탐색 알고리즘
+### 1. Binary Search: 이진탐색 알고리즘
 
 2. Brute Force(브루트 포스): 완전탐색 알고리즘
   - Sequential Search: 순차 탐색 알고리즘
