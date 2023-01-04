@@ -10,12 +10,12 @@ class RecommendNewId {
         return answer;
     }
     
-    public String check1(String id) {
+    private String check1(String id) {
         // 1단계는 모든 대문자를 소문자로 바꿔줍니다.
         return id.toLowerCase();
     }
     
-    public String check2(String id) {
+    private String check2(String id) {
         String newId = id;
         
         // 2단계는 정규식을 사용해서 소문자, 숫자, -, _, . 이외의 문자를 전부 제거해줍니다.
@@ -30,7 +30,7 @@ class RecommendNewId {
         return newId;
     }
     
-    public String check3(String id) {
+    private String check3(String id) {
         String newId = id;
         
         // 3단계는 . 가 두번 이상 연속된 부분을 . 하나로 바꿔줍니다.
@@ -54,7 +54,7 @@ class RecommendNewId {
         return newId;
     }
     
-    public String check4(String id) {
+    private String check4(String id) {
         String newId = id;
         
         // 4단계는 . 가 id의 처음이나 끝에 존재한다면 제거합니다.
@@ -81,7 +81,7 @@ class RecommendNewId {
         return newId;
     }
     
-    public String check5(String id) {
+    private String check5(String id) {
         String newId = id;
         // 5단계는 id가 빈 문자열이라면 a를 대입합니다.
         
@@ -92,7 +92,7 @@ class RecommendNewId {
         return newId;
     }
     
-    public String check6(String id) {
+    private String check6(String id) {
         String newId = id;
         
         // 6단계는 id의 길이가 16자 이상이면 맨 앞부터 15개의 문자를 제외한 나머지 문자열은 제거하고, 만약 마지막 문자가 . 이라면 제거합니다.
@@ -107,7 +107,7 @@ class RecommendNewId {
         return newId;
     }
     
-    public String check7(String id) {
+    private String check7(String id) {
         String newId = id;
         // 7단계는 id의 길이가 2자 이하라면 id의 길이가 3이 될 때까지 반복해서 마지막 문자를 붙입니다.
         
