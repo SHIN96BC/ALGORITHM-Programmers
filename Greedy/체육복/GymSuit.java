@@ -49,7 +49,54 @@ class GymSuit {
         return answer;
 */ 
         
-// 2차 
+// 2차 96점 실패
+/*
+        int answer = 0;
+        
+        // 오름차순 정렬
+        Arrays.sort(lost);
+        Arrays.sort(reserve);
+        
+        // Arrays의 contains을 사용하기 위해서 int배열을 Integer배열로 박싱 해줍니다.
+        // (int배열인 상태에서 asList를 사용하면 List<int[]> 이런 형태로 들어가게되서 contains 사용이 불가하다.)
+        Integer[] lostWrapper = Arrays.stream(lost).boxed().toArray(Integer[]::new);
+        // reserve 배열에서 사용된 값을 다시 체크하지 않기 위한 변수
+        int reserveIndex = 0;
+        // 중복된 학생의 번호(도난당했는데 여분을 가진 학생)
+        int overlabNum = -1;
+        // 중복된 학생 숫자(도난당했는데 여분을 가진 학생) 리스트
+        List<Integer> overlabList = new ArrayList<>();
+        for (int lostNum: lost) {
+            for (int i = reserveIndex; i < reserve.length; i++) {
+                boolean isOverlab = Arrays.asList(lostWrapper).contains(reserve[i]);
+                // 중복인 번호 스킵
+                if (isOverlab) {
+                    // 중복 리스트에 없는 번호만 리스트에 추가
+                    if (!overlabList.contains(reserve[i])) {
+                        overlabList.add(reserve[i]);
+                    }
+                    continue;
+                }
+
+                int checkGap = lostNum - reserve[i];
+                if (checkGap == 1 || checkGap == -1) {
+                    if (!overlabList.contains(lostNum)) {
+                        reserveIndex = i + 1;
+                        answer++;
+                    }
+                    break;
+                } 
+            }
+        }
+        
+        // 수업을 들을 수 있는 총 인원수 계산
+        // 총 인원수 - (체육복을 도난 당한 학생수 + 체육복을 빌려줄 수 있는 학생수 - 중복개수) + 체육복을 빌리는데 성공한 학생수 + 체육복을 원래 가지고 있는 학생수
+        answer = n - (lost.length + reserve.length - overlabList.size()) + (answer + reserve.length);
+        
+        return answer;
+*/
+        
+// 3차
         int answer = 0;
         
         return answer;
