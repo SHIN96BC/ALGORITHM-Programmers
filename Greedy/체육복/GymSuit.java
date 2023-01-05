@@ -62,8 +62,6 @@ class GymSuit {
         Integer[] lostWrapper = Arrays.stream(lost).boxed().toArray(Integer[]::new);
         // reserve 배열에서 사용된 값을 다시 체크하지 않기 위한 변수
         int reserveIndex = 0;
-        // 중복된 학생의 번호(도난당했는데 여분을 가진 학생)
-        int overlabNum = -1;
         // 중복된 학생 숫자(도난당했는데 여분을 가진 학생) 리스트
         List<Integer> overlabList = new ArrayList<>();
         for (int lostNum: lost) {
