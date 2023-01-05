@@ -4,6 +4,8 @@ class GymSuit {
     public int solution(int n, int[] lost, int[] reserve) {
         
 // 1차 60점 실패 
+// 원인 파악: lost 배열에서 나온 숫자를 순서대로 중복체크 하다보니 lost배열에서 아직 나오지 않은 숫자가 중복된 경우에 answer++이 실행되어서 문제가 생깁니다.
+// 해결방안: 중복체크를 lost 배열이 아니라 reserve 배열에서 하는 것이 좋을 것 같습니다.
 /*        
         int answer = 0;
         
