@@ -108,7 +108,7 @@ class GymSuit {
         // (int배열인 상태에서 asList를 사용하면 List<int[]> 이런 형태로 들어가게되서 contains 사용이 불가하다.)
         Integer[] reserveWrapper = Arrays.stream(reserve).boxed().toArray(Integer[]::new);
         
-        // (2) 중복 번호를 찾는 작업
+        // (2) 중복 제거 작업
         // 중복된 번호 리스트
         List<Integer> overlabList = new ArrayList<>();
         for (int lostNum: lost) {
