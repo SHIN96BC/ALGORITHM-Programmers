@@ -2,6 +2,8 @@ class NumberPair {
     public String solution(String X, String Y) {
         
 // 시간초과 실패(73.7)
+// 원인분석: String을 그대로 합치고, 반복문이 많아서 시간초과가 발생
+// 해결방안: StringBuffer를 사용해서 성능을 향상시키고, 반복문의 갯수를 최소화
 /*        
         String answer = "";
         
