@@ -90,6 +90,40 @@ class NumberPair {
         return answer.toString();
 */
         
-//
+// 성공
+        StringBuffer answer = new StringBuffer();
+        
+        int[] xArr = getZeroToNineCount(X);
+        int[] yArr = getZeroToNineCount(Y);
+        
+        // 가장 큰 수를 구해야하므로 9부터 0까지 짝궁이 몇개인지 체크
+        for (int i = xArr.length - 1; i >= 0; i--) {
+            while (xArr[i] > 0 && yArr[i] > 0) {
+                xArr[i] -= 1;
+                yArr[i] -= 1;
+                
+                answer.append(i);
+            }
+        }
+        
+        // -1 체크
+        if (answer.length() < 1) 
+            return "-1";
+        // 0 체크
+        if (answer.charAt(0) == '0')
+            return "0";
+
+        return answer.toString();
+    }
+    
+    // 해당 문자열에 0~9의 숫자가 몇개 들어있는지 체크
+    private int[] getZeroToNineCount(String str) {
+        int[] arr = new int[10];
+        // 아스키코드 0 == 48
+        for (int i = 0; i < str.length(); i++) {
+            arr[str.charAt(i) - '0'] += 1;
+        }
+        
+        return arr;
     }
 }
