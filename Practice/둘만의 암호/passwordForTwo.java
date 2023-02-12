@@ -13,7 +13,7 @@ class Solution {
 
         int skipCount = 0;
         for (int i = 1; i <= moveIndex; i++) {
-            char checkAlphabet = (char)(c + i);
+            char checkAlphabet = (char)(c + i); 
             String alphabet = Character.toString(checkOutOfRange(checkAlphabet));
 
             if (skip.contains(alphabet)) {
@@ -28,7 +28,6 @@ class Solution {
     
     private char checkOutOfRange(char alphabet) {
          // 아스키코드 a ~ z == 97 ~ 122
-        
         if (alphabet > 122) {
             return (char)('a' + alphabet - 123);
         } else {
