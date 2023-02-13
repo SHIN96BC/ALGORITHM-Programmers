@@ -3,7 +3,7 @@ class Solution {
         StringBuffer answer = new StringBuffer();
         
         for (int i = 0; i < s.length(); i++) {
-            answer.append(getNextAlphabet(s.charAt(i), index, skip));
+            answer.append(getNextAlphabet(s.charAt(i), index, skip)); 
         }
         
         return answer.toString();
@@ -14,10 +14,10 @@ class Solution {
         int skipCount = 0;
         for (int i = 1; i <= moveIndex; i++) {
             char checkAlphabet = (char)(c + i); 
-            String alphabet = Character.toString(checkOutOfRange(checkAlphabet));
+            String alphabet = Character.toString(checkOutOfRange(checkAlphabet)); 
 
             if (skip.contains(alphabet)) {
-                skipCount++;
+                skipCount++; 
             }
         }
 
