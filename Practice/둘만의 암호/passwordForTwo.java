@@ -1,4 +1,53 @@
 class Solution {
+
+/* 문제발생1 (21.1점)
+    문제 원인: 스킵되는 문자 빼고 15번 돌아야하는데 그냥 15번만 돌고 멈추는게 원인이었습니다.
+    작성한 테스트케이스: s = "dwertyufbn", skip = "zklpm", index = 15, result = "wqxhjsnyue"
+    잘못된 result: "woxhjrkyue"
+    문제가 발생한 문자: s에서 "wyu"
+    
+    public String solution(String s, String skip, int index) {
+        StringBuffer answer = new StringBuffer();
+
+        for (int i = 0; i < s.length(); i++) {
+            answer.append(getNextAlphabet(s.charAt(i), index, skip)); 
+        }
+
+        return answer.toString();
+    }
+    
+    private char getNextAlphabet(char c, int moveIndex, String skip) {
+        int skipCount = 0;
+        for (int i = 1; i <= moveIndex; i++) {
+            char checkAlphabet = (char)(c + i); 
+            String alphabet = Character.toString(checkOutOfRange(checkAlphabet)); 
+
+            if (skip.contains(alphabet)) {
+                skipCount++; 
+            }
+        }
+        char movedAlphabet = (char)(c + moveIndex + skipCount);
+        return checkOutOfRange(movedAlphabet);
+    }
+    
+    private char checkOutOfRange(char alphabet) {
+         // 아스키코드 a ~ z == 97 ~ 122
+        if (alphabet > 122) {
+            return (char)('a' + alphabet - 123);
+        } else {
+            return alphabet;
+        }
+    }
+*/    
+    
+/* 문제발생2 (78.9점)
+    실패테스트케이스: 3, 17, 18, 19번
+    문제원인: 알파벳의 범위를 넘어가는게 원인이었습니다.
+    작성한 테스트케이스: s = "wxyz", skip = "abcdefghij", index = 20, result = "klmn"
+    잘못된 result = "{|}~"
+    원인분석: 알파벳은 총26개인데 skip에는 최대 10개의 알파벳이 들어갈 수 있습니다. 그때 skip이 아닌 알파벳은 16개인데 index를 20을 주게되면 
+            두바퀴를 돌아야하는데 첫번째는 a로 잘 돌아가지만 두바퀴째에 알파벳의 범위를 초과해버립니다.
+            
     public String solution(String s, String skip, int index) {
         StringBuffer answer = new StringBuffer();
         
@@ -43,20 +92,47 @@ class Solution {
             return (char)alphabetNum;
         }
     }
+*/
+    
+// 성공    
+    public String solution(String s, String skip, int index) {
+        StringBuffer answer = new StringBuffer();
+        
+        for (int i = 0; i < s.length(); i++) {
+            answer.append(getNextAlphabet(s.charAt(i), index, skip));
+        }
+        
+        return answer.toString();
+    }
+    
+    private char getNextAlphabet(char c, int moveIndex, String skip) {
+
+        int loopCount = 1;
+        char checkAlphabet = c;
+        // char 값을 1씩 증가시키는게 아닌 체크하는 알파벳을 바꿔가면 진행하는 방식으로 변경
+        while (loopCount <= moveIndex) {
+            checkAlphabet = (char)(checkAlphabet + 1);
+
+            String alphabet = Character.toString(checkOutOfRange(checkAlphabet));
+            
+            if (!skip.contains(alphabet)) {
+                loopCount++;
+            }
+            checkAlphabet = alphabet.charAt(0);
+        }
+
+        return checkOutOfRange(checkAlphabet);
+    }
+    
+    private char checkOutOfRange(char alphabet) {
+         // 아스키코드 a ~ z == 97 ~ 122
+        
+        if (alphabet > 122) {
+            return (char)('a' + alphabet - 123);
+        } else {
+            return alphabet;
+        }
+    }
 }
 
-/* 문제발생1 (21.1점)
-    문제 원인: 스킵되는 문자 빼고 15번 돌아야하는데 그냥 15번만 돌고 멈추는게 원인이었습니다.
-    작성한 테스트케이스: s = "dwertyufbn", skip = "zklpm", index = 15, result = "wqxhjsnyue"
-    잘못된 result: "woxhjrkyue"
-    문제가 발생한 문자: s에서 "wyu"
-*/
 
-/* 문제발생2 (78.9점)
-    실패테스트케이스: 3, 17, 18, 19번
-    문제원인: 알파벳의 범위를 넘어가는게 원인이었습니다.
-    작성한 테스트케이스: s = "wxyz", skip = "abcdefghij", index = 20, result = "klmn"
-    잘못된 result = "{|}~"
-    원인분석: 알파벳은 총26개인데 skip에는 최대 10개의 알파벳이 들어갈 수 있습니다. 그때 skip이 아닌 알파벳은 16개인데 index를 20을 주게되면 
-            두바퀴를 돌아야하는데 첫번째는 a로 잘 돌아가지만 두바퀴째에 알파벳의 범위를 초과해버립니다.
-*/
