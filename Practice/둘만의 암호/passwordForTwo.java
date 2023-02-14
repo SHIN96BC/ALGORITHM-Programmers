@@ -35,3 +35,13 @@ class Solution {
         }
     }
 }
+
+/*
+    문제 원인: 스킵되는 문자 빼고 15번 돌아야하는데 그냥 15번만 돌고 멈추는게 원인이었습니다.
+    직접 작성한 테스트케이스: s = "dwertyufbn", skip = "zklpm", index = 15, result = "wqxhjsnyue"
+    잘못된 result: "woxhjrkyue"
+    문제가 발생한 문자: s에서 "wyu"
+*
+*/
+
+
