@@ -1,4 +1,4 @@
-class getCenter {
+class GetCenter {
 	public int solution(String s) {
         int answer = 0;
         int max = 0;
