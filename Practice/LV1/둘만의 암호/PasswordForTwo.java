@@ -1,4 +1,4 @@
-class Solution {
+class PasswordForTwo {
 
 /* 문제발생1 (21.1점)
     문제 원인: 스킵되는 문자 빼고 15번 돌아야하는데 그냥 15번만 돌고 멈추는게 원인이었습니다.
