@@ -16,6 +16,6 @@ public class ColatzGuess{
                 answer++;
             }
         }
-        return -1;
+        return -1; 
     }
 }
