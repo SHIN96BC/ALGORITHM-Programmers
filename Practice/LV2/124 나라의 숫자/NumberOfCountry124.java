@@ -1,9 +1,88 @@
 class NumberOfCountry124 {
+
+/* # 실패 15점 문제 파악 중
     public String solution(int n) {
         String answer = "";
-      
         
-      
+        answer = change124Number(n);
+        
+        return answer;
+    }
+    
+    private String change124Number(int decimalNumber) {
+        StringBuffer result = new StringBuffer();
+        
+        // 3의 배수인지 여부 0이면 3의배수
+        int multipleOf3 = decimalNumber % 3;
+        
+        // 몫(3으로 나누어질 숫자)
+        int quotient = decimalNumber;
+        // 나머지(124 숫자를 결정하는 숫자)
+        int remainder = 0;
+        boolean isFirst = true;
+        
+        while (quotient > 0) {
+            remainder = quotient % 3;
+            
+            if (multipleOf3 == 0) {
+                // 3의 배수인 경우
+                if (isFirst) {
+                    // 1의자리 숫자를 결정하는 첫번째는 나머지가 0 == 4, 1 == 1, 2 == 2
+                    switch (remainder) {
+                        case 0:
+                            result.append(4);
+                            break;
+                        case 1:
+                            result.append(1);
+                            break;
+                        case 2:
+                            result.append(2);
+                            break;
+                    }
+                    // n이 1자리수인 경우 몫이 남아있어도 반복문이 끝나도록 합니다.
+                    if (quotient < 10) {
+                        quotient = 0;
+                    }
+                    isFirst = false;
+                } else {
+                    // 1의자리를 제외하고는 나머지가 0 == 2, 1 == 4, 2 == 1
+                    switch (remainder) {
+                        case 0:
+                            result.insert(0, 2);
+                            break;
+                        case 1:
+                            result.insert(0, 4);
+                            break;
+                        case 2:
+                            result.insert(0, 1);
+                            break;
+                    }
+                }
+            } else {
+                // 3의 배수가 아닌 경우
+                // 나머지가 0 == 4, 1 == 1, 2 == 2
+                switch (remainder) {
+                    case 0:
+                        result.append(4);
+                        break;
+                    case 1:
+                        result.append(1);
+                        break;
+                    case 2:
+                        result.append(2);
+                        break;
+                }
+            }
+            quotient = quotient / 3;
+        }
+        
+        return result.toString();
+    }
+*/
+    
+    public String solution(int n) {
+        String answer = "";
+        
         return answer;
     }
 }
