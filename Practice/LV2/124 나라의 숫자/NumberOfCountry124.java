@@ -79,12 +79,89 @@ class NumberOfCountry124 {
         return result.toString();
     }
 */
-    
+
+/* # 실패 20
     public String solution(int n) {
         String answer = "";
         
+        answer = change124Number(n);
+        
         return answer;
     }
+    
+    private String change124Number(int n) {
+        StringBuffer result = new StringBuffer();
+        
+        // 몫(3으로 나누어질 숫자)
+        int quotient = n;
+        // 나머지(124 숫자를 결정하는 숫자)
+        int remainder = 0;
+        
+        // n이 3의 배수면 패턴 0번, 아니면 1번 스타트
+        int patternNum = 0;
+        
+        while (quotient > 0) {
+            System.out.println("patternNum = " + patternNum);
+            remainder = quotient % 3;
+            
+            System.out.println("quotient = " + quotient);
+            System.out.println("remainder = " + remainder);
+            
+            // 나누는 숫자가 3이면 패턴을 0으로 바꿔서 계산하고 멈춥니다.
+            if (quotient == 3) {
+                result.insert(0, pattern(remainder, 0));
+                break;
+            }
+            
+            result.insert(0, pattern(remainder, patternNum));
+            System.out.println("result = " + result.toString());
+            
+            if (quotient % 3 == 0 && patternNum == 0) {
+                patternNum = 1;
+            }
+            
+            quotient = quotient / 3;
+            
+            System.out.println();
+        }
+        
+        return result.toString();
+    }
+    
+    private int pattern(int remainder, int patternNum) {
+        if (patternNum == 0) {
+            // 패턴0 나머지가 0 == 4, 1 == 1, 2 == 2
+            switch (remainder) {
+                case 0:
+                    return 4;
+                case 1:
+                    return 1;
+                case 2:
+                    return 2;
+            }
+        } else if(patternNum == 1) {
+            // 패턴1 나머지가 0 == 2, 1 == 4, 2 == 1
+            switch (remainder) {
+                case 0:
+                    return 2;
+                case 1:
+                    return 4;
+                case 2:
+                    return 1;
+            }
+        }
+        return -1;
+    }
+*/
+    
+    public String solution(int n) {
+        String answer = "";
+       
+        
+        
+        return answer;
+    }
+    
 }
 
 /* 패턴 분석
@@ -157,10 +234,10 @@ class NumberOfCountry124 {
     
     
     n = 66 -> 3의 배수
-                66 / 3 = 몫 22, 나머지 0 1의 자리는 4 ->
-                22 / 3 = 몫 7, 나머지 1 10의 자리는 4 -> 
-                7 / 3 = 몫 2, 나머지 1 100의 자리는 4 -> 
-                2 / 3 = 몫 0, 나머지 2 1000의 자리는 1 ->
+                66 / 3 = 몫 22, 나머지 0 ->
+                22 / 3 = 몫 7, 나머지 1 -> 
+                7 / 3 = 몫 2, 나머지 1 -> 
+                2 / 3 = 몫 0, 나머지 2 ->
                 결과. 66 == 1444
         
         
@@ -216,16 +293,14 @@ class NumberOfCountry124 {
                 33 / 3 = 몫 11, 나머지 0 ->
                 11 / 3 = 몫 3, 나머지 2 ->
                 3 / 3 = 몫 1, 나머지 0 ->
-                결과. 101 == 4242
-                4142
+                결과. 101 == 4142
 
     n = 102 -> 3의 배수
-                102 / 3 = 몫 34, 나머지 0 나누는 숫자가 3의배수이므로 4 ->
-                34 / 3 = 몫 11, 나머지 1 나누는 숫자가 3의배수가 아니므로 1 -> 
-                11 / 3 = 몫 3, 나머지 2 나누는 숫자가 3의배수가 아니므로 2 -> 
-                3 / 3 = 몫 1, 나머지 0 나누는 숫자가 3의배수이므로 4 -> 
-                결과. 102 == 4214
-                4144
+                102 / 3 = 몫 34, 나머지 0 ->
+                34 / 3 = 몫 11, 나머지 1 -> 
+                11 / 3 = 몫 3, 나머지 2 -> 
+                3 / 3 = 몫 1, 나머지 0 -> 
+                결과. 102 == 4144
                 
      n = 103 -> 
 
@@ -234,11 +309,13 @@ class NumberOfCountry124 {
         1. n을 3으로 나눈 나머지로 124 숫자를 만든다.
         2. n을 3으로 나눈 몫을 다시 3으로 나누며 진행한다.
         3. 나누는숫자가 3이면 몫이 0이 아니어도 중지한다.
-        4. 나누는 숫자가 3의 배수일 때마다 패턴1, 패턴2가 순서대로 바뀐다.
+        4. 첫번째 나눌때는 0번 패턴으로 진행한다.
+        5. 나누는 숫자가 3의 배수일 때 패턴이 1로 바뀐다.
         
+    # 패턴0
+        1. 0(나머지) == 4(124숫자), 1 == 1, 2 == 2
+            
     # 패턴1
         1. 0(나머지) == 2(124숫자), 1 == 4, 2 == 1
-            
-    # 패턴2
-        1. 0(나머지) == 4(124숫자), 1 == 1, 2 == 2
+        
 */
