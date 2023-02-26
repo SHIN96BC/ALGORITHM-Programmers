@@ -152,6 +152,8 @@ class NumberOfCountry124 {
         }
         return -1;
     }
+    
+    // 실패 케이스 n = 9, 27, 30, 60, 90
 */
     
     public String solution(int n) {
