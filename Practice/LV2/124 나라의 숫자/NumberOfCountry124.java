@@ -156,6 +156,75 @@ class NumberOfCountry124 {
     // 실패 케이스 n = 9, 27, 30, 60, 90
 */
     
+    
+/* # 실패 25
+        public String solution(int n) {
+        String answer = "";
+        
+        answer = change124Number(n);
+        
+        return answer;
+    }
+    
+    private String change124Number(int n) {
+        StringBuffer result = new StringBuffer();
+        
+        // 몫(3으로 나누어질 숫자)
+        int quotient = n;
+        // 나머지(124 숫자를 결정하는 숫자)
+        int remainder = 0;
+        
+        // n이 3의 배수면 패턴 0번, 아니면 1번 스타트
+        int patternNum = 0;
+        
+        while (quotient > 0) {
+            remainder = quotient % 3;
+            
+            // 나누는 숫자가 3이면 패턴을 0으로 바꿔서 계산하고 멈춥니다.
+            if (quotient == 3) {
+                result.insert(0, pattern(remainder, patternNum));
+                break;
+            }
+            
+            result.insert(0, pattern(remainder, patternNum));
+            
+            if (quotient % 3 == 0 && patternNum == 0) {
+                patternNum = 1;
+            }
+            
+            quotient = quotient / 3;
+        }
+        
+        return result.toString();
+    }
+    
+    private int pattern(int remainder, int patternNum) {
+        if (patternNum == 0) {
+            // 패턴0 나머지가 0 == 4, 1 == 1, 2 == 2
+            switch (remainder) {
+                case 0:
+                    return 4;
+                case 1:
+                    return 1;
+                case 2:
+                    return 2;
+            }
+        } else if(patternNum == 1) {
+            // 패턴1 나머지가 0 == 2, 1 == 4, 2 == 1
+            switch (remainder) {
+                case 0:
+                    return 2;
+                case 1:
+                    return 4;
+                case 2:
+                    return 1;
+            }
+        }
+        return -1;
+    }
+    // 실패 케이스 n == 60(두번째 자리가 다름), 101(끝 자리가 다름), 102(끝 자리가 다름), 108(끝 자리가 하나 김), 120(끝 자리가 하나 김)
+*/
+    
     public String solution(int n) {
         String answer = "";
        
