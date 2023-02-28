@@ -225,6 +225,7 @@ class NumberOfCountry124 {
     // 실패 케이스 n == 60(두번째 자리가 다름), 101(끝 자리가 다름), 102(끝 자리가 다름), 108(끝 자리가 하나 김), 120(끝 자리가 하나 김)
 */
     
+    
     public String solution(int n) {
         String answer = "";
        
