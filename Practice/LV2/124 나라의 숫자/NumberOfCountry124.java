@@ -1,6 +1,6 @@
 class NumberOfCountry124 {
 
-/* # 실패 15점 문제 파악 중
+/* #1 실패 15점 문제 파악 중
     public String solution(int n) {
         String answer = "";
         
@@ -80,7 +80,7 @@ class NumberOfCountry124 {
     }
 */
 
-/* # 실패 20
+/* #2 실패 20
     public String solution(int n) {
         String answer = "";
         
@@ -157,7 +157,7 @@ class NumberOfCountry124 {
 */
     
     
-/* # 실패 25
+/* #3 실패 25
         public String solution(int n) {
         String answer = "";
         
@@ -226,17 +226,55 @@ class NumberOfCountry124 {
 */
     
     
+    
+// #4 성공
     public String solution(int n) {
         String answer = "";
-       
         
+        answer = change124Number(n);
         
         return answer;
     }
     
+    private String change124Number(int n) {
+        StringBuffer result = new StringBuffer();
+        
+        // 몫(3으로 나누어질 숫자)
+        int quotient = n;
+        // 나머지(124 숫자를 결정하는 숫자)
+        int remainder = 0;
+        
+        while (quotient > 0) {
+            remainder = quotient % 3;
+            
+            int resultNum = pattern(remainder);
+            result.insert(0, resultNum);
+
+            quotient = quotient / 3;
+            if (remainder == 0) {
+                quotient = quotient - 1;
+            }
+        }
+        
+        return result.toString();
+    }
+    
+    private int pattern(int remainder) {
+        // 패턴0 나머지가 1 == 1, 2 == 2, 0 == 4
+        switch (remainder) {
+            case 1:
+                return 1;
+            case 2:
+                return 2;
+            case 0:
+                return 4;
+        }
+        return -1;
+    }
+    
 }
 
-/* 패턴 분석
+/* 초기의 패턴 분석(실패 #1 ~ #3까지에 사용한 패턴)
 
     1 == 1
     2 == 2
@@ -378,11 +416,11 @@ class NumberOfCountry124 {
 
 
     # 기본 패턴
-        1. n을 3으로 나눈 나머지로 124 숫자를 만든다.
-        2. n을 3으로 나눈 몫을 다시 3으로 나누며 진행한다.
-        3. 나누는숫자가 3이면 몫이 0이 아니어도 중지한다.
-        4. 첫번째 나눌때는 0번 패턴으로 진행한다.
-        5. 나누는 숫자가 3의 배수일 때 패턴이 1로 바뀐다.
+        1. n을 3으로 나눈 나머지로 124 숫자를 만듭니다.
+        2. n을 3으로 나눈 몫을 다시 3으로 나누며 진행합니다.
+        3. 나누는숫자가 3이면 몫이 0이 아니어도 중지합니다.
+        4. 첫번째 나눌때는 0번 패턴으로 진행합니다.
+        5. 나누는 숫자가 3의 배수일 때 패턴이 1로 바뀝니다.
         
     # 패턴0
         1. 0(나머지) == 4(124숫자), 1 == 1, 2 == 2
@@ -390,4 +428,28 @@ class NumberOfCountry124 {
     # 패턴1
         1. 0(나머지) == 2(124숫자), 1 == 4, 2 == 1
         
+    # 해당 패턴의 문제점
+        1. 마지막으로 나누어지는 숫자가 3일 때 몫이 1이 남게 되므로 한번 더 반복되는 문제(result 값이 한자리 길어짐)
+        2. 3의 배수를 나누어서 나온 나머지 값이 패턴0과 패턴1에 맞는 부분과 맞지않는 부분이 생기는 문제
+           (3의 배수라도 숫자마다 다른 패턴이 적용됨) 
+           (3의 배수가 등장하는 횟수에 따라 바뀌는 것도 아니고, 3의 배수가 등장할 때마다 바뀌는 구조도 아니었음)
+           (9, 27, 30, 60, 90에 패턴을 맞추면 101, 102가 맞지 않았음)
+        
+*/
+
+
+/* 수정한 패턴 분석(성공 #4)
+    
+    # 패턴을 수정한 이유
+        1. 처음에는 몫(나누어지는 수)가 3의 배수일 때 패턴이 바뀌는 구조인줄 알고 나머지가 0일 때마다 패턴을 바꾸어가며
+           진행했지만, 아무리 시도를 해봐도 나머지로 패턴을 나누는 방식으로는 모든 케이스를 충족시킬 수 없음을 인지했습니다.
+        2. 또한 result 패턴이 1,2,4 3가지밖에 없으므로, 몫(나누어지는 수)이 3의 배수일 때(즉, 나머지가 0일 때) 반드시 
+           그 다음 result 숫자의 자릿수가 올라가게 됩니다. 
+           그래서 3의 배수가 나올때마다 몫이나 나머지의 값을 보정해줘야만 합니다. 
+           하지만 나머지에 따라서 result 값을 보정해주는 방법이 실패했기 때문에 몫(나누어지는 수)을 보정해주는 방법을 시도했습니다.
+    
+    # 수정한 패턴
+        1. 몫(나누어지는 수)가 3의 배수일 때(나머지가 0일 떄) 자릿수가 하나 올라가므로, 다음으로 나누어지는 수(몫)에서 -1 해줍니다.
+        2. 이렇게 자릿수가 하나 올라갈 때 몫을 -1 보정해주면 기존 패턴의 첫번째 패턴 하나만 가지고 모든 경우의 수를 충족시킬 수 있습니다.
+
 */
