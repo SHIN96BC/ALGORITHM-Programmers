@@ -3,6 +3,7 @@ class NextBigNumber {
         int answer = 0;
       
         
+        
          
         return answer;
     }
